@@ -8,6 +8,7 @@ public class FireTrap : MonoBehaviour
     [Header("FireTrap Timers")]
     [SerializeField] private float activationDelay;
     [SerializeField] private float activeTime;
+
     [Header("SFX")]
     [SerializeField] private AudioClip fireSound;
     private bool triggered;
@@ -40,7 +41,7 @@ public class FireTrap : MonoBehaviour
         if (collider.CompareTag("Player") && active)
         {
             // Damage the player if the trap is active
-            playerHealth?.TakeDamage(damage);
+            playerHealth.TakeDamage(damage);
         }
     }
 
@@ -55,7 +56,6 @@ public class FireTrap : MonoBehaviour
         triggered = true;
         spriteRenderer.color = Color.red;
 
-        // Wait for the activation delay
         yield return new WaitForSeconds(activationDelay);
         SoundManager.Instance.PlaySound(fireSound);
 
@@ -63,7 +63,6 @@ public class FireTrap : MonoBehaviour
         active = true;
         animator.SetBool("activated", true);
 
-        // Wait for the active time before deactivating the trap
         yield return new WaitForSeconds(activeTime);
 
         active = false;

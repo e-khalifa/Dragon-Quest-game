@@ -34,13 +34,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //  #region Win
     public void Win()
     {
         winScreen.SetActive(true);
         Time.timeScale = 0;
     }
-    // #endregion
 
     public void GameOver()
     {

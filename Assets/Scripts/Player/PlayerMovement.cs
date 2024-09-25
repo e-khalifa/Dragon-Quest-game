@@ -5,8 +5,10 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Parameters")]
-    public float moveSpeed;
     [SerializeField] private float jumpForce;
+    public float moveSpeed;
+    private float wallJumpCooldown;
+    private float horizontalInput;
 
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
@@ -15,29 +17,24 @@ public class PlayerMovement : MonoBehaviour
     [Header("SFX")]
     [SerializeField] private AudioClip jumpSound;
 
+    [Header("Win")]
     [SerializeField] private PrincessHeart heart;
-
     private UIManager uiManager;
 
     private Rigidbody2D rb;
     private Animator animator;
     private BoxCollider2D boxCollider;
 
-    private float wallJumpCooldown;
-    private float horizontalInput;
-
-    // Awake is called when you load the script
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         uiManager = FindAnyObjectByType<UIManager>();
-
-
     }
+    #region Player Movement
 
-    // Called once per frame
+
     private void Update()
     {
         HandleInput();
@@ -58,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
         else if (horizontalInput < -0.01f)
             transform.localScale = new Vector3(-1, 1, 1);  // Face left
 
-        // Wall jump logic
         if (wallJumpCooldown > 0.2f)
         {
             // Horizontal movement
@@ -70,10 +66,8 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = Vector2.zero;       // Stop all movement
             }
             else
-            {
-                rb.gravityScale = 7;              // Reset gravity
-            }
-            // Jump
+                rb.gravityScale = 7;
+
             if (Input.GetKey(KeyCode.Space))
             {
                 Jump();
@@ -82,29 +76,25 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         else
-        {
             wallJumpCooldown += Time.deltaTime;  // Increase cooldown over time/ deltaTime: the amount of time that has passed since the last frame update.
-        }
     }
 
     private void UpdateAnimation()
     {
-        // Set Animator parameters for running and grounded states
         animator.SetBool("run", horizontalInput != 0);
         animator.SetBool("grounded", IsGrounded());
     }
 
-    // Handles the jump logic
     private void Jump()
     {
         if (IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            animator.SetTrigger("jump");  // Trigger jump animation
+            animator.SetTrigger("jump");
         }
         else if (IsOnWall() && !IsGrounded())
         {
-            if (horizontalInput == 0)  // If no horizontal input, jump away from the wall
+            if (horizontalInput == 0)  // If no horizontal input, jump away(other direction) from the wall
             {
                 rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);  // Push horizontally
                 transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);  // Flip player direction
@@ -112,31 +102,34 @@ public class PlayerMovement : MonoBehaviour
             else  // If moving towards a wall, do a wall jump
             {
                 rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);  // Jump away from the wall
-                wallJumpCooldown = 0;  // Reset wall jump cooldown
+                wallJumpCooldown = 0;
             }
         }
     }
 
-    // Checks if the player is grounded
     private bool IsGrounded()
     {
         // BoxCast downward from the center of the player's collider
-        RaycastHit2D rayCastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
+        RaycastHit2D rayCastHit = Physics2D.BoxCast(
+            boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
         return rayCastHit.collider != null;  // Return true if it hits the ground
     }
-    // Checks if the player is touching a wall
     private bool IsOnWall()
     {
         // BoxCast sideways from the center of the player's collider
-        RaycastHit2D rayCastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
-        return rayCastHit.collider != null;  // Return true if it hits a wall
+        RaycastHit2D rayCastHit = Physics2D.BoxCast(
+            boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(
+                transform.localScale.x, 0), 0.1f, wallLayer);
+        return rayCastHit.collider != null;
     }
 
 
-    public bool CanAttack()
-    {
-        return horizontalInput == 0 && IsGrounded() && !IsOnWall();
-    }
+    public bool CanAttack() =>
+    horizontalInput == 0 && IsGrounded() && !IsOnWall();
+
+    #endregion
+
+    #region Win
 
     private void Win()
     {
@@ -145,7 +138,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private IEnumerator HandleWin()
     {
-
         heart.TriggerHeartAnimation();
         yield return new WaitForSeconds(1);
         Win();
@@ -154,10 +146,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Princess"))
-        {
             StartCoroutine(HandleWin());
-
-        }
     }
-
+    #endregion
 }

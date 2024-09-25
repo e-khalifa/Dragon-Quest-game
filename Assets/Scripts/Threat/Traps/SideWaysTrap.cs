@@ -1,23 +1,12 @@
 using UnityEngine;
 
-public class EnemySideWays : MonoBehaviour
+public class SideWaysTrap : Trap
 {
-    [SerializeField] private float damage;
     [SerializeField] private float movementDistance;
     [SerializeField] private float speed;
     private bool movingLeft;
     private float leftEdge;
     private float rightEdge;
-
-
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.CompareTag("Player"))
-        {
-            collider.GetComponent<Health>().TakeDamage(damage);
-        }
-    }
 
     private void Awake()
     {

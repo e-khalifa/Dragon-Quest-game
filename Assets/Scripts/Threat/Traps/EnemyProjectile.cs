@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyProjectile : EnemyDamage
+public class EnemyProjectile : Trap
 {
     [SerializeField] private float speed;
     [SerializeField] private float resetTime;

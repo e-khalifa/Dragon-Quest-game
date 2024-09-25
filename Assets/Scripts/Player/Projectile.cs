@@ -48,7 +48,7 @@ public class Projectile : MonoBehaviour
         if (Mathf.Sign(localScaleX) != direction)
             localScaleX = -localScaleX;
 
-        //Flip it using scale if needed
+        //Flip the projectile using scale if needed
         transform.localScale = new Vector3(localScaleX, transform.lossyScale.y, transform.lossyScale.z);
     }
 

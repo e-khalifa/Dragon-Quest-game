@@ -3,11 +3,12 @@ using DG.Tweening;
 
 public class PrincessHeart : MonoBehaviour
 {
-    [SerializeField] private float newYPosition;
     [Header("SFX")]
     [SerializeField] private AudioClip winSound;
     [SerializeField] private AudioClip princessSound;
 
+    [Header("Position Parameters")]
+    [SerializeField] private float newYPosition;
     private Vector3 originalScale;
     private Vector3 scaleTo;
 
@@ -21,9 +22,8 @@ public class PrincessHeart : MonoBehaviour
     public void TriggerHeartAnimation()
     {
         if (!gameObject.activeSelf)
-        {
             gameObject.SetActive(true);
-        }
+
         SoundManager.Instance.PlaySound(winSound);
 
         Sequence heartAnimation = DOTween.Sequence();
@@ -31,7 +31,6 @@ public class PrincessHeart : MonoBehaviour
         heartAnimation.Join(transform.DOMoveY(newYPosition, 0.8f)
          .SetEase(Ease.InOutSine)).OnComplete(() =>
          SoundManager.Instance.PlaySound(princessSound)
-
         );
     }
 }

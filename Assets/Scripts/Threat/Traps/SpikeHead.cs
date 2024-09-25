@@ -1,18 +1,19 @@
 using UnityEngine;
 
-public class SpikeHead : EnemyDamage
+public class SpikeHead : Trap
 {
     [Header("SpikeHead Attributes")]
     [SerializeField] private float speed;
     [SerializeField] private float range;
     [SerializeField] private float checkDelay;
     [SerializeField] private LayerMask playerLayer;
-    [Header("SFX")]
-    [SerializeField] private AudioClip impactSound;
     private readonly Vector3[] directions = new Vector3[4];
     private Vector3 destination;
     private float checkTimer;
     private bool attacking;
+
+    [Header("SFX")]
+    [SerializeField] private AudioClip impactSound;
 
     private void OnEnable() => Stop();
 
@@ -48,10 +49,10 @@ public class SpikeHead : EnemyDamage
     }
     private void CalculateDirections()
     {
-        directions[0] = transform.right * range; //Right direction
-        directions[1] = -transform.right * range; //Left direction
-        directions[2] = transform.up * range; //Up direction
-        directions[3] = -transform.up * range; //Down direction
+        directions[0] = transform.right * range;
+        directions[1] = -transform.right * range;
+        directions[2] = transform.up * range;
+        directions[3] = -transform.up * range;
     }
     private void Stop()
     {

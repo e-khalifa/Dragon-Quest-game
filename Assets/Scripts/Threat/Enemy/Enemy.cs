@@ -36,7 +36,7 @@ public abstract class Enemy : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.BoxCast(
             boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance,
-            new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z),
+            new Vector2(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y),
             0, Vector2.left, 0, playerLayer);
 
         if (hit.collider != null)

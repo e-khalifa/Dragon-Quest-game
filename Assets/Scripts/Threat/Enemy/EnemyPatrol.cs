@@ -5,9 +5,14 @@ public class EnemyPatrol : MonoBehaviour
     [Header("Patrol Points")]
     [SerializeField] private Transform leftEdge;
     [SerializeField] private Transform rightEdge;
+    [SerializeField] private Transform upperEdge;
+    [SerializeField] private Transform lowerEdge;
 
     [Header("Enemy")]
     [SerializeField] private Transform enemy;
+
+    [Header("Player")]
+    [SerializeField] private Transform player;
 
     [Header("Movement parameters")]
     [SerializeField] private float speed;
@@ -28,10 +33,18 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerIsWithinPatrolArea())
+            FollowPlayer();
+        else
+            Patrol();
+    }
+
+    private void Patrol()
+    {
         if (movingLeft)
         {
             // Debug.Log("Moving Left: Enemy position = " + enemy.position.x + ", Left Edge = " + leftEdge.position.x);
-            if (enemy.position.x > leftEdge.position.x) // Changed from >= to > to avoid getting stuck
+            if (enemy.position.x > leftEdge.position.x)
                 MoveInDirection(-1);
             else
                 DirectionChange();
@@ -39,10 +52,8 @@ public class EnemyPatrol : MonoBehaviour
         else
         {
             // Debug.Log("Moving Right: Enemy position = " + enemy.position.x + ", Right Edge = " + rightEdge.position.x);
-            if (enemy.position.x < rightEdge.position.x) // Changed from <= to < to avoid getting stuck
-            {
+            if (enemy.position.x < rightEdge.position.x)
                 MoveInDirection(1);
-            }
             else
             {
                 // Debug.Log("Reached Right Edge, changing direction.");
@@ -50,8 +61,23 @@ public class EnemyPatrol : MonoBehaviour
             }
         }
     }
-
-
+    private void FollowPlayer()
+    {
+        if (PlayerIsOnRight())
+            MoveInDirection(1);
+        else
+            MoveInDirection(-1);
+    }
+    private bool PlayerIsWithinPatrolArea()
+    {
+        bool withinX = player.position.x > leftEdge.position.x && player.position.x < rightEdge.position.x;
+        bool withinY = player.position.y > lowerEdge.position.y && player.position.y < upperEdge.position.y;
+        return withinX && withinY;
+    }
+    private bool PlayerIsOnRight()
+    {
+        return player.position.x > enemy.position.x;
+    }
 
     private void DirectionChange()
     {
@@ -60,7 +86,7 @@ public class EnemyPatrol : MonoBehaviour
 
         if (idleTimer > idleDuration)
             movingLeft = !movingLeft; // Toggle the direction
-            // Debug.Log("Direction Changed: Now moving " + (movingLeft ? "Left" : "Right"));
+                                      // Debug.Log("Direction Changed: Now moving " + (movingLeft ? "Left" : "Right"));
     }
 
     private void MoveInDirection(int _direction)
