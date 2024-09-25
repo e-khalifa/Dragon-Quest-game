@@ -11,7 +11,6 @@ public class Projectile : MonoBehaviour
 
     private void Awake()
     {
-
         boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
     }
@@ -20,16 +19,13 @@ public class Projectile : MonoBehaviour
         if (hit) return;
         float movementSpeed = speed * Time.deltaTime * direction;
         transform.Translate(movementSpeed, 0, 0);
-
         lifeTime += Time.deltaTime;
 
-        // If the projectile has been active for more than 5 seconds, deactivate it
         if (lifeTime > 5)
             Deactivate();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (!collision.CompareTag("Door"))
         {
             hit = true;
@@ -52,6 +48,7 @@ public class Projectile : MonoBehaviour
         if (Mathf.Sign(localScaleX) != direction)
             localScaleX = -localScaleX;
 
+        //Flip it using scale if needed
         transform.localScale = new Vector3(localScaleX, transform.lossyScale.y, transform.lossyScale.z);
     }
 

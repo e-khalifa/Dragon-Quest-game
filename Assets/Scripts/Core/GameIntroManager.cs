@@ -3,10 +3,15 @@ using System.Collections;
 
 public class GameIntroManager : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private Transform princess; 
-    [SerializeField] private CameraController cameraController; 
+    [Header("Camera Settings")]
+    [SerializeField] private CameraController cameraController;
+
+    [Header("Princess settings")]
+    [SerializeField] private Transform princess;
     [SerializeField] private float waitTimePrincess;
+
+    [Header("Player settings")]
+    [SerializeField] private Transform player;
     [SerializeField] private float waitTimePlayer;
 
 
@@ -22,7 +27,7 @@ public class GameIntroManager : MonoBehaviour
         cameraController.MoveToTarget(princess);
         yield return new WaitForSeconds(waitTimePrincess);
 
-        cameraController.MoveToTarget(player);        
+        cameraController.MoveToTarget(player);
         cameraController.StartFollowingPlayer();
     }
 }

@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class HealthCollectible : MonoBehaviour
+public class HealthCollectable : MonoBehaviour
 {
+    [Header("Collectable Settings")]
     [SerializeField] private float healthValue;
+
     [Header("SFX")]
     [SerializeField] private AudioClip pickUpHeart;
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Player"))
         {
             collider.GetComponent<Health>().AddHealth(healthValue);
-            SoundManager.instance.PlaySound(pickUpHeart);
+            SoundManager.Instance.PlaySound(pickUpHeart);
             gameObject.SetActive(false);
         }
     }

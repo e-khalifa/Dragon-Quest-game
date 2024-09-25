@@ -21,15 +21,15 @@ public class PlayerRespawn : MonoBehaviour
             playerHealth.Died();
             return;
         }
-        playerHealth.Respawn(); //Restore player health and reset animation
-        transform.position = currentCheckpoint.position; //Move player to checkpoint location
+        playerHealth.Respawn();
+        transform.position = currentCheckpoint.position;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("CheckPoint"))
         {
             currentCheckpoint = collision.transform;
-            SoundManager.instance.PlaySound(checkpoint);
+            SoundManager.Instance.PlaySound(checkpoint);
             collision.GetComponent<Collider2D>().enabled = false;
             collision.GetComponent<Animator>().SetTrigger("appear");
         }

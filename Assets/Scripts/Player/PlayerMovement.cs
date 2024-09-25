@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Jump();
                 if (Input.GetKeyDown(KeyCode.Space) && IsGrounded()) //GetKeyDown only gets called on one frame when the user starts press it
-                    SoundManager.instance.PlaySound(jumpSound);
+                    SoundManager.Instance.PlaySound(jumpSound);
             }
         }
         else

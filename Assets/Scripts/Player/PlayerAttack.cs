@@ -9,7 +9,7 @@ public class PlayerAttack : MonoBehaviour
 
     private Animator animator;
     private PlayerMovement playerMovement;
-    private float coolDownTimer = Mathf.Infinity;
+    private float coolDownTimer = Mathf.Infinity; //Player can attack from start
 
     private void Awake()
     {
@@ -18,16 +18,14 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Update()
     {
-        // If the left mouse button is clicked, cooldown time has passed, and the player can attack
         if (Input.GetMouseButton(0) && coolDownTimer > attackCoolDown && playerMovement.CanAttack())
-            Attack(); // Perform attack
-
-        coolDownTimer += Time.deltaTime; // Increment cooldown timer by the time passed since last frame
+            Attack();
+        coolDownTimer += Time.deltaTime;
     }
 
     private void Attack()
     {
-        SoundManager.instance.PlaySound(fireballSound);
+        SoundManager.Instance.PlaySound(fireballSound);
         animator.SetTrigger("attack");
 
         coolDownTimer = 0;
@@ -48,6 +46,4 @@ public class PlayerAttack : MonoBehaviour
         }
         return 0; // Default to the first fireball if all are active
     }
-
-
 }

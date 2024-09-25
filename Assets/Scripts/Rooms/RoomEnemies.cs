@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class RoomEnemies : MonoBehaviour
 {
+    [Header("Enemies")]
     public GameObject[] enemies;
     private Vector3[] initialPosition;
 

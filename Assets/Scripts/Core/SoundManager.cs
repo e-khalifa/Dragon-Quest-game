@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager instance { get; private set; }
+    public static SoundManager Instance { get; private set; }
     private AudioSource soundSource;
     private AudioSource musicSource;
-
 
 
     private void Awake()
@@ -13,14 +12,13 @@ public class SoundManager : MonoBehaviour
         soundSource = GetComponent<AudioSource>();
         musicSource = transform.GetChild(0).GetComponent<AudioSource>();
 
-
-        if (instance == null)
+        //To Make the BGM consistent throughout the game and different scenes
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
-
         }
-        else if (instance != null && instance != this)
+        else if (Instance != null && Instance != this)
             Destroy(gameObject);
 
         ChangeSoundVolume(0);

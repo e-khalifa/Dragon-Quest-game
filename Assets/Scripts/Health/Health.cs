@@ -37,13 +37,11 @@ public class Health : MonoBehaviour
     }
     public void TakeDamage(float _damage)
     {
-        //min and max value
         CurrentHealth = Mathf.Clamp(CurrentHealth - _damage, 0, startingHealth);
 
         if (CurrentHealth > 0)
         {
-            SoundManager.instance.PlaySound(hurtSound);
-
+            SoundManager.Instance.PlaySound(hurtSound);
             animator.SetTrigger("hurt");
             damageTaken++;
             Debug.Log("Damage Taken: " + damageTaken);
@@ -62,7 +60,6 @@ public class Health : MonoBehaviour
 
         else
          if (!dead)
-
             Died();
     }
 
@@ -74,36 +71,27 @@ public class Health : MonoBehaviour
 
     private IEnumerator Invulnerability()
     {
-        Debug.Log("Invulnerability started.");
-
-        // Disable collision between layers 8 and 9
         Physics2D.IgnoreLayerCollision(8, 9, true);
 
         for (int i = 0; i < numberOffFlashes; i++)
         {
-            // Change color to indicate invulnerability
             spriteRenderer.color = new Color(1, 0, 0, 0.5f);
             yield return new WaitForSeconds(iFramesDuration / (numberOffFlashes * 2));
 
-            // Revert to original color
             spriteRenderer.color = Color.white;
             yield return new WaitForSeconds(iFramesDuration / (numberOffFlashes * 2));
         }
 
-        // Re-enable collision between layers 8 and 9 after invulnerability period ends
         Physics2D.IgnoreLayerCollision(8, 9, false);
-
-        Debug.Log("Invulnerability ended.");
     }
 
     private IEnumerator HandleRespawn()
     {
-        damageTaken = 0; // Reset damage counter
-        SoundManager.instance.PlaySound(deathSound);
+        damageTaken = 0;
+        SoundManager.Instance.PlaySound(deathSound);
         animator.SetTrigger("die");
         dead = true;
 
-        // Wait for the die animation to finish
         yield return new WaitForSeconds(1.0f);
         playerRespawn.CheckRespawn();
     }
@@ -125,9 +113,14 @@ public class Health : MonoBehaviour
         foreach (Behaviour component in components)
             component.enabled = false;
         dead = true;
-        SoundManager.instance.PlaySound(deathSound);
+        SoundManager.Instance.PlaySound(deathSound);
         if (gameObject.CompareTag("Player"))
+        {
+
             uiManager.GameOver();
+            Deactivate();
+
+        }
     }
     private void ResetHurtTrigger()
     {

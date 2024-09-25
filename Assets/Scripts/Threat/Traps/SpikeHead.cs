@@ -62,7 +62,7 @@ public class SpikeHead : EnemyDamage
 
     protected override void OnTriggerEnter2D(Collider2D collider)
     {
-        SoundManager.instance.PlaySound(impactSound);
+        SoundManager.Instance.PlaySound(impactSound);
         base.OnTriggerEnter2D(collider);
         Stop(); //Stop spikehead once he hits something
     }

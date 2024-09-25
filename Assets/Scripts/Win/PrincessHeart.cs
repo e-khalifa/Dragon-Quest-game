@@ -24,13 +24,13 @@ public class PrincessHeart : MonoBehaviour
         {
             gameObject.SetActive(true);
         }
-        SoundManager.instance.PlaySound(winSound);
+        SoundManager.Instance.PlaySound(winSound);
 
         Sequence heartAnimation = DOTween.Sequence();
         heartAnimation.Append(transform.DOScale(scaleTo, 0.8f).SetEase(Ease.InOutSine));
         heartAnimation.Join(transform.DOMoveY(newYPosition, 0.8f)
          .SetEase(Ease.InOutSine)).OnComplete(() =>
-         SoundManager.instance.PlaySound(princessSound)
+         SoundManager.Instance.PlaySound(princessSound)
 
         );
     }

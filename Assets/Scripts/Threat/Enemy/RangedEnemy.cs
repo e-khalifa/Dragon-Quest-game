@@ -25,7 +25,7 @@ public class RangedEnemy : Enemy
 
     private void RangedAttack()
     {
-        SoundManager.instance.PlaySound(fireballSound);
+        SoundManager.Instance.PlaySound(fireballSound);
         fireballs[FindFireball()].transform.position = firepoint.position;
         fireballs[FindFireball()].GetComponent<EnemyProjectile>().ActivateProjectile();
     }

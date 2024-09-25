@@ -11,8 +11,9 @@ public class UIManager : MonoBehaviour
     [Header("Pause")]
     [SerializeField] private GameObject pauseScreen;
 
+    [Header("Win")]
     [SerializeField] private GameObject winScreen;
-
+    private int sceneIndex;
 
 
     private void Awake()
@@ -20,7 +21,6 @@ public class UIManager : MonoBehaviour
         gameOverScreen.SetActive(false);
         pauseScreen.SetActive(false);
         winScreen.SetActive(false);
-
     }
 
     private void Update()
@@ -34,24 +34,39 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
+    //  #region Win
     public void Win()
     {
         winScreen.SetActive(true);
         Time.timeScale = 0;
-
     }
-
-
-    #region GameOver
-    private int sceneIndex;
+    // #endregion
 
     public void GameOver()
     {
         gameOverScreen.SetActive(true);
-        SoundManager.instance.PlaySound(gameOverSound);
+        SoundManager.Instance.PlaySound(gameOverSound);
+    }
+    public void PauseGame(bool status)
+    {
+        pauseScreen.SetActive(status);
+
+        //Can use it to make the game faster(2) or slower(0.5)
+        if (status)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
     }
 
+    public void SoundVolume()
+    {
+        SoundManager.Instance.ChangeSoundVolume(0.2f);
+    }
+    public void MusicVolume()
+    {
+        SoundManager.Instance.ChangeMusicVolume(0.2f);
+
+    }
     public void Restart()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -66,29 +81,4 @@ public class UIManager : MonoBehaviour
     {
         Application.Quit();
     }
-    #endregion
-
-
-    #region Pause
-    public void PauseGame(bool status)
-    {
-        pauseScreen.SetActive(status);
-
-        //Can use it to make the game faster(2) or slower(0.5)
-        if (status)
-            Time.timeScale = 0;
-        else
-            Time.timeScale = 1;
-    }
-
-    public void SoundVolume()
-    {
-        SoundManager.instance.ChangeSoundVolume(0.2f);
-    }
-    public void MusicVolume()
-    {
-        SoundManager.instance.ChangeMusicVolume(0.2f);
-
-    }
-    #endregion
 }

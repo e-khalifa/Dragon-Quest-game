@@ -27,7 +27,6 @@ public class SelectionArrow : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
             ChangePosition(1);
 
-        //Interacting with options
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.KeypadEnter))
             Interact();
 
@@ -37,7 +36,7 @@ public class SelectionArrow : MonoBehaviour
     {
         currentPosition += _change;
         if (_change != 0)
-            SoundManager.instance.PlaySound(buttonSound);
+            SoundManager.Instance.PlaySound(buttonSound);
 
         if (currentPosition < 0)
             currentPosition = options.Length - 1;
@@ -47,7 +46,7 @@ public class SelectionArrow : MonoBehaviour
     }
     private void Interact()
     {
-        SoundManager.instance.PlaySound(selectedSound);
+        SoundManager.Instance.PlaySound(selectedSound);
         options[currentPosition].GetComponent<Button>().onClick.Invoke();
     }
 

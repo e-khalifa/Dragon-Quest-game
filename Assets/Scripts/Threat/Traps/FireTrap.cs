@@ -57,7 +57,7 @@ public class FireTrap : MonoBehaviour
 
         // Wait for the activation delay
         yield return new WaitForSeconds(activationDelay);
-        SoundManager.instance.PlaySound(fireSound);
+        SoundManager.Instance.PlaySound(fireSound);
 
         spriteRenderer.color = Color.white;
         active = true;

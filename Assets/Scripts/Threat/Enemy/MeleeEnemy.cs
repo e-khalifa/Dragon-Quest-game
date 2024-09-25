@@ -12,7 +12,7 @@ public class MeleeEnemy : Enemy
         {
             cooldownTimer = 0;
             anim.SetTrigger("meleeAttack");
-            SoundManager.instance.PlaySound(swordSound);
+            SoundManager.Instance.PlaySound(swordSound);
         }
         else
         {
