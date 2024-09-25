@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [Header("Pause")]
     [SerializeField] private GameObject pauseScreen;
 
+    [SerializeField] private GameObject winScreen;
 
 
 
@@ -18,6 +19,7 @@ public class UIManager : MonoBehaviour
     {
         gameOverScreen.SetActive(false);
         pauseScreen.SetActive(false);
+        winScreen.SetActive(false);
 
     }
 
@@ -31,6 +33,16 @@ public class UIManager : MonoBehaviour
                 PauseGame(true);
         }
     }
+
+
+    public void Win()
+    {
+        winScreen.SetActive(true);
+        Time.timeScale = 0;
+
+    }
+
+
     #region GameOver
     private int sceneIndex;
 
@@ -46,15 +58,17 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
-    public void MainMenu()
+    /*public void MainMenu()
     {
         SceneManager.LoadScene(0);
-    }
+    }*/
     public void Quit()
     {
         Application.Quit();
     }
     #endregion
+
+
     #region Pause
     public void PauseGame(bool status)
     {

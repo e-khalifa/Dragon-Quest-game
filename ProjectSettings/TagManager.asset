@@ -8,6 +8,9 @@ TagManager:
   - Door
   - Enemy
   - CheckPoint
+  - Princess
+  - Wall
+  - Ceiling
   layers:
   - Default
   - TransparentFX
@@ -50,6 +53,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 4219890375
+    locked: 0
+  - name: Wall
+    uniqueID: 3554290139
     locked: 0
   - name: Player
     uniqueID: 404151395

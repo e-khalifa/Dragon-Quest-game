@@ -1,9 +1,11 @@
 using UnityEngine;
+using System.Collections;
+
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Parameters")]
-    [SerializeField] private float moveSpeed;
+    public float moveSpeed;
     [SerializeField] private float jumpForce;
 
     [Header("Layers")]
@@ -13,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("SFX")]
     [SerializeField] private AudioClip jumpSound;
 
+    [SerializeField] private PrincessHeart heart;
+
+    private UIManager uiManager;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -27,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
+        uiManager = FindAnyObjectByType<UIManager>();
+
+
     }
 
     // Called once per frame
@@ -129,10 +137,27 @@ public class PlayerMovement : MonoBehaviour
     {
         return horizontalInput == 0 && IsGrounded() && !IsOnWall();
     }
-    /* This method checks if 2 objects are colliding
-private void OnCollisionEnter2D(Collision2D collision)
-{
-    if (collision.gameObject.tag == "Ground")
-        isGrounded();
-}*/
+
+    private void Win()
+    {
+        animator.SetTrigger("win");
+        uiManager.Win();
+    }
+    private IEnumerator HandleWin()
+    {
+
+        heart.TriggerHeartAnimation();
+        yield return new WaitForSeconds(1);
+        Win();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Princess"))
+        {
+            StartCoroutine(HandleWin());
+
+        }
+    }
+
 }

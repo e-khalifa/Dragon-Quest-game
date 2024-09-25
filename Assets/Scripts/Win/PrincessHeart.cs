@@ -1,0 +1,37 @@
+using UnityEngine;
+using DG.Tweening;
+
+public class PrincessHeart : MonoBehaviour
+{
+    [SerializeField] private float newYPosition;
+    [Header("SFX")]
+    [SerializeField] private AudioClip winSound;
+    [SerializeField] private AudioClip princessSound;
+
+    private Vector3 originalScale;
+    private Vector3 scaleTo;
+
+    void Start()
+    {
+        originalScale = transform.localScale;
+        scaleTo = originalScale * 12;
+        gameObject.SetActive(false);
+    }
+
+    public void TriggerHeartAnimation()
+    {
+        if (!gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);
+        }
+        SoundManager.instance.PlaySound(winSound);
+
+        Sequence heartAnimation = DOTween.Sequence();
+        heartAnimation.Append(transform.DOScale(scaleTo, 0.8f).SetEase(Ease.InOutSine));
+        heartAnimation.Join(transform.DOMoveY(newYPosition, 0.8f)
+         .SetEase(Ease.InOutSine)).OnComplete(() =>
+         SoundManager.instance.PlaySound(princessSound)
+
+        );
+    }
+}

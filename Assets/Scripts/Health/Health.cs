@@ -33,7 +33,7 @@ public class Health : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerRespawn = GetComponent<PlayerRespawn>();
-        uiManager = FindAnyObjectByType<UIManager>(); //first active loaded obj of that type
+        uiManager = FindAnyObjectByType<UIManager>();
     }
     public void TakeDamage(float _damage)
     {

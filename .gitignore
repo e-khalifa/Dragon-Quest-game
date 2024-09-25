@@ -18,7 +18,28 @@ UserSettings/
 *.pidb
 *.booproj
 *.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
 
 # OS-specific files
 .DS_Store
 Thumbs.db
+
+# Packages
+Packages/manifest.json
+Packages/packages-lock.json
+
+# Builds
+*.apk
+*.aab
+*.unitypackage
+
+# Crash Reports
+sysinfo.txt
+crashreport/
+
+# DOTween modules and settings
+Assets/Demigiant/DOTween/DOTweenSettings.asset
