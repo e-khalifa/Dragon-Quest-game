@@ -5,8 +5,7 @@
 ## Table of Contents
 1. [📸 Demo](#-demo)
 2. [📱  Game Link](#-game-link)
-3. [📸 Screenshots](#-screenshots)
-4. [✨ Key Features](#-key-features)
+3. [✨ Key Features](#-key-features)
 
 ## 📸 Demo
 [Detailed Demo](https://drive.google.com/file/d/1wNwTTkDrez9HaUqdUjKns5j6vJFBc0QT/view?usp=sharing)
@@ -19,10 +18,6 @@
 ## 📱 Check it out!
 [Dragon Quest Game](https://play.unity.com/en/games/dfe10423-ef6d-4afa-94f5-49953337e116/dragon-quest)
 
-## 📸 Screenshots
-<div>
-<img src="https://github.com/e-khalifa/Dragon_Quest_Game/blob/main/Assets/Sprites/Screenshots/4.JPG">
-<div>
 
 ## ✨ Key Features
 -   **Unity-Powered**: Built with Unity for seamless performance and smooth gameplay.
