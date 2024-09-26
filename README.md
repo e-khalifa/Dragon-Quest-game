@@ -4,7 +4,7 @@
 
 ## Table of Contents
 1. [📸 Demo](#-demo)
-2. [📱   Game Link](#-game-link)
+2. [📱   Game Link](#-check-it-out)
 3. [✨ Key Features](#-key-features)
 
 ## 📸 Demo
