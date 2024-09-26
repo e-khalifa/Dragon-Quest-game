@@ -2,13 +2,13 @@
  
 **Dragon Quest** is a retro-themed web adventure game where the player is on a quest to save his princess. 
 
-### Table of Contents
+## Table of Contents
 1. [📸 Demo](#-demo)
 2. [📱 Game Link](#-game-link)
 3. [📸 Screenshots](#-screenshots)
 4. [✨ Key Features](#-key-features)
 
-### 📸 Demo
+## 📸 Demo
 <!-- Variables -->
 [onboarding]: assets/sprites/screenshots/demo.gif 'Demo'
 [Detailed Demo](https://drive.google.com/file/d/1wNwTTkDrez9HaUqdUjKns5j6vJFBc0QT/view?usp=sharing)
@@ -20,10 +20,10 @@
 | ![Demo][demo] | 
 
 
-### 📱 Check it out!
+## 📱 Check it out!
 [Dragon Quest Game](https://play.unity.com/en/games/dfe10423-ef6d-4afa-94f5-49953337e116/dragon-quest)
 
-### 📸 Screenshots
+## 📸 Screenshots
 <!-- Variables -->
 [onboarding]: assets/sprites/screenshots/4.jpg 'Dragon Quest'
 
@@ -34,7 +34,7 @@
 
 
 
-### ✨ Key Features
+## ✨ Key Features
 -   **Unity-Powered**: Built with Unity for seamless performance and smooth gameplay.
 -   **Challenging Environments**: Each room offers unique challenges that require quick thinking and skillful navigation to progress.
 -   **Enemy Encounters**: The player Faces off against a variety of enemies, each with unique behaviors and attack patterns.
