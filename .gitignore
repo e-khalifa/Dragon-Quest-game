@@ -36,6 +36,7 @@ Packages/packages-lock.json
 *.apk
 *.aab
 *.unitypackage
+/Builds/
 
 # Crash Reports
 sysinfo.txt
