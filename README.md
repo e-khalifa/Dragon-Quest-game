@@ -4,13 +4,13 @@
 
 ## Table of Contents
 1. [📸 Demo](#-demo)
-2. [📱 Game Link](#-game-link)
+2. [📱  Game Link](#-game-link)
 3. [📸 Screenshots](#-screenshots)
 4. [✨ Key Features](#-key-features)
 
 ## 📸 Demo
 <!-- Variables -->
-[onboarding]: assets/sprites/screenshots/demo.gif 'Demo'
+[onboarding]: Assets/Sprites/Screenshots/demo.gif 'Demo'
 [Detailed Demo](https://drive.google.com/file/d/1wNwTTkDrez9HaUqdUjKns5j6vJFBc0QT/view?usp=sharing)
 
 
@@ -25,7 +25,7 @@
 
 ## 📸 Screenshots
 <!-- Variables -->
-[onboarding]: assets/sprites/screenshots/4.jpg 'Dragon Quest'
+[onboarding]: Assets/Sprites/Screenshots/4.jpg 'Dragon Quest'
 
 
 |      Dragon Quest       |     
