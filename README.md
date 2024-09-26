@@ -25,7 +25,7 @@
 
 ## 📸 Screenshots
 <!-- Variables -->
-[onboarding]: Assets/Sprites/Screenshots/4.jpg 'Dragon Quest'
+[onboarding]: Assets/Sprites/Screenshots/4.JPG 'Dragon Quest'
 
 
 |      Dragon Quest       |     
